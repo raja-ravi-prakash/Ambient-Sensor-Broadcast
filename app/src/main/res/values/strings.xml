@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SensorLogging</string>
+    <string name="connect">Connect</string>
+    <string name="enter_host_name">Enter Host Name</string>
+    <string name="enter_port">Enter Port</string>
+    <string name="stop">STOP</string>
+    <string name="broadcast_gif">Broadcast Gif</string>
 </resources>
