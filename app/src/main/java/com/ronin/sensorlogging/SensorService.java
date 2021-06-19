@@ -105,14 +105,14 @@ public class SensorService extends Service implements SensorEventListener {
 
         if(lastProx < 5){
             type= "Proximity";
-            value = "Chey tera hukka";
+            value = "MinValue";
         }
         else {
             type = "Ambient";
             value = sensorValue;
         }
 
-        String data = MessageFormat.format("Sensor Data ({0}) - {1}\n",type,value);
+        String data = MessageFormat.format("{0}:{1}",type,value);
 
         DatagramPacket d = new DatagramPacket(data.getBytes(),data.length(),ip,port);
 
