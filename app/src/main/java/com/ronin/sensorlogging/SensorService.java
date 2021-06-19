@@ -11,6 +11,8 @@ import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
+import android.provider.Settings;
+import android.content.Context;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -102,17 +104,24 @@ public class SensorService extends Service implements SensorEventListener {
 
         String type;
         String value;
-
+        float brightness=255;
         if(lastProx < 5){
             type= "Proximity";
             value = "MinValue";
         }
         else {
+            Context context = this;
             type = "Ambient";
             value = sensorValue;
+            try {
+                Thread.sleep(5000);
+                brightness = Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, -1);  // in the range [0, 255]
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
-        String data = MessageFormat.format("{0}:{1}",type,value);
+        String data = MessageFormat.format("{0}:{1}:{2}",type,value,brightness);
 
         DatagramPacket d = new DatagramPacket(data.getBytes(),data.length(),ip,port);
 
